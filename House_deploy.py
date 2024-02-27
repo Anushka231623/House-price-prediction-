@@ -22,6 +22,9 @@ def load_and_predict(entries):
 
         print("Input data:", input_data)  # Print input data for debugging
         
+        if len(input_data) != 12:
+            return "Failed to predict price: Invalid input data length"
+        
         input_data = [input_data]  # Reshape input data
         prediction = model.predict(input_data)
         return f"The predicted price is ${prediction[0]:,.2f}"
