@@ -47,20 +47,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-# Evaluate the model separately
-try:
-    model = joblib.load('finalized_model.sav')
-
-    # Example input data for prediction
-    input_data = [3, 2.5, 2000, 5000, 2, 0, 1, 3, 1800, 200, 1990, 2010]
-
-    # Reshape input data
-    input_data = [input_data]
-
-    # Make prediction
-    prediction = model.predict(input_data)
-
-    print(f"The predicted price is ${prediction[0]:,.2f}")
-except Exception as e:
-    print(f"An error occurred during separate prediction: {e}")
