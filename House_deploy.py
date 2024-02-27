@@ -25,7 +25,7 @@ def load_and_predict(entries):
         return f"The predicted price is ${prediction[0]:,.2f}"
     except Exception as e:
         print(f"An error occurred: {e}")
-        return "Failed to predict price"
+        return f"Failed to predict price: {e}"  # Return the specific error message
 
 def main():
     st.title("House Price Prediction")
