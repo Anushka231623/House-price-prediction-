@@ -7,10 +7,10 @@ import requests
 #loaded_model = pickle.load(open(r"https://github.com/Anushka231623/House-price-prediction-/blob/main/finalized_model.sav",'rb'))
 model_url="https://raw.githubusercontent.com/Anushka231623/House-price-prediction-/blob/main/finalized_model.sav"
 r=requests.get(model_url)
- if r.status_code==200:
-    with open('finalized_model.sav','wb') as f:
-        f.write(r.content)
-        loaded_model = pickle.load(f)
+if r.status_code==200:
+ with open('finalized_model.sav','wb') as f:
+  f.write(r.content)
+  loaded_model = pickle.load(f)
 
         loaded_model = pickle.load(f)
 def DecisionTreeRegressor(input_data):
