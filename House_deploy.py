@@ -7,7 +7,7 @@ import joblib
 # Load the model
 #loaded_model = pickle.load(open(r"https://raw.githubusercontent.com/Anushka231623/House-price-prediction-/blob/main/finalized_model.sav", 'rb'))
 # Load the model
-model_url = "https://raw.githubusercontent.com/Anushka231623/House-price-prediction-/blob/main/finalized_model.sav"
+model_url = "https://raw.githubusercontent.com/Anushka231623/House-price-prediction-/main/finalized_model.sav"
 r = requests.get(model_url)
 
 if r.status_code == 200:
@@ -38,10 +38,6 @@ def predict_price(entries):
     except ValueError:
         return "Please enter valid inputs."
 
-        
- 
-
-
 def main():
     st.title("House Price Prediction")
     entries = []
@@ -54,5 +50,6 @@ def main():
         result = predict_price(entries)
         st.success(result)
 
-if _name_ == '_main_':
+if __name__ == '__main__':
     main()
+
