@@ -1,42 +1,31 @@
-import pickle
-import numpy as np
 import streamlit as st
 import requests
 import joblib
 
-# Load the model
-#loaded_model = pickle.load(open(r"https://raw.githubusercontent.com/Anushka231623/House-price-prediction-/blob/main/finalized_model.sav", 'rb'))
-# Load the model
-model_url = "https://raw.githubusercontent.com/Anushka231623/House-price-prediction-/main/finalized_model.sav"
-r = requests.get(model_url)
+def load_model():
+    model_url = "https://raw.githubusercontent.com/Anushka231623/House-price-prediction-/main/finalized_model.sav"
+    r = requests.get(model_url)
 
-if r.status_code == 200:
-    with open('finalized_model.sav', 'wb') as f:
-        f.write(r.content)
-else:
-    print("Failed to download the model file")
+    if r.status_code == 200:
+        with open('finalized_model.sav', 'wb') as f:
+            f.write(r.content)
+    else:
+        print("Failed to download the model file")
 
-model = joblib.load('finalized_model.sav')
-
-
-def DecisionTreeRegressor(input_data):
-    input_data_asarray = np.asarray(input_data)
-    input_data_reshaped = input_data_asarray.reshape(1, -1) 
-    prediction = model.predict(input_data_reshaped)
-    return prediction
-
-def predict_price(entries):
+def load_and_predict(entries):
     try:
-        # Get user input
+        model = joblib.load('finalized_model.sav')
+
         input_data = [int(entries[0]), float(entries[1]), int(entries[2]), int(entries[3]), 
                       float(entries[4]), int(entries[5]), int(entries[6]), int(entries[7]), 
                       int(entries[8]), int(entries[9]), int(entries[10]), int(entries[11])]
-        
-        # Perform prediction
-        predicted_price = DecisionTreeRegressor(input_data)[0]
-        return f"The predicted price is ${predicted_price:,.2f}"
-    except ValueError:
-        return "Please enter valid inputs."
+
+        input_data = [input_data]  # Reshape input data
+        prediction = model.predict(input_data)
+        return f"The predicted price is ${prediction[0]:,.2f}"
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return "Failed to predict price"
 
 def main():
     st.title("House Price Prediction")
@@ -47,9 +36,11 @@ def main():
         entries.append(st.number_input(feature))
     
     if st.button('Predict Price'):
-        result = predict_price(entries)
+        load_model()  # Ensure model is loaded before making predictions
+        result = load_and_predict(entries)
         st.success(result)
 
 if __name__ == '__main__':
     main()
+
 
