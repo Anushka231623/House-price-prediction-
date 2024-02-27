@@ -7,10 +7,16 @@ import requests
 #loaded_model = pickle.load(open(r"https://github.com/Anushka231623/House-price-prediction-/blob/main/finalized_model.sav",'rb'))
 model_url="https://raw.githubusercontent.com/Anushka231623/House-price-prediction-/blob/main/finalized_model.sav"
 r=requests.get(model_url)
-if r.status_code==200:
- with open('finalized_model.sav','wb') as f:
+if r.status_code == 200:
+ with open('finalized_model.sav', 'wb') as f:
   f.write(r.content)
-  loaded_model = pickle.load(f)
+  loaded_model = pickle.load(open('finalized_model.sav', 'rb'))
+  return loaded_model
+else:
+ print("Failed to download the model file")
+ return None
+# Load the model
+loaded_model = load_model()
 def DecisionTreeRegressor(input_data):
     input_data_asarray = np.asarray(input_data)
     input_data_reshaped = input_data_asarray.reshape(1, -1) 
@@ -29,12 +35,7 @@ def predict_price(entries):
         return f"The predicted price is ${predicted_price:,.2f}"
     except ValueError:
         return "Please enter valid inputs."
-
-        
- 
-
-
-def main():
+    def main():
     st.title("House Price Prediction")
     entries = []
     for feature in ['Bedrooms:', 'Bathrooms:', 'Sqft Living:', 'Sqft Lot:', 'Floors:', 
