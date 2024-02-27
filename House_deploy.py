@@ -5,7 +5,7 @@ import joblib
 import requests
 # Load the model
 #loaded_model = pickle.load(open(r"https://github.com/Anushka231623/House-price-prediction-/blob/main/finalized_model.sav",'rb'))
-model_url="https://github.com/Anushka231623/House-price-prediction-/blob/main/finalized_model.sav"
+model_url="https://raw.githubusercontent.com/Anushka231623/House-price-prediction-/blob/main/finalized_model.sav"
 r=requests.get(model_url)
  
 if r.status_code==200:
