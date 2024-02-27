@@ -11,8 +11,6 @@ if r.status_code==200:
  with open('finalized_model.sav','wb') as f:
   f.write(r.content)
   loaded_model = pickle.load(f)
-
-        loaded_model = pickle.load(f)
 def DecisionTreeRegressor(input_data):
     input_data_asarray = np.asarray(input_data)
     input_data_reshaped = input_data_asarray.reshape(1, -1) 
