@@ -3,7 +3,7 @@ import numpy as np
 import streamlit as st
 
 # Load the model
-loaded_model = pickle.load(open(r"https://github.com/Anushka231623/House-price-prediction-/blob/main/trained_model.sav",'rb'))
+loaded_model = pickle.load(open(r"https://raw.githubusercontent.com/Anushka231623/House-price-prediction-/blob/main/trained_model.sav",'rb'))
 
 def DecisionTreeRegressor(input_data):
     input_data_asarray = np.asarray(input_data)
