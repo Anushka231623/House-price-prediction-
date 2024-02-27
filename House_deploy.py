@@ -9,17 +9,19 @@ def load_model():
     if r.status_code == 200:
         with open('finalized_model.sav', 'wb') as f:
             f.write(r.content)
+        print("Model downloaded successfully")
     else:
         print("Failed to download the model file")
 
 def load_and_predict(entries):
     try:
         model = joblib.load('finalized_model.sav')
+        print("Model loaded successfully")
 
         input_data = [int(entries[0]), float(entries[1]), int(entries[2]), int(entries[3]), 
                       float(entries[4]), int(entries[5]), int(entries[6]), int(entries[7]), 
                       int(entries[8]), int(entries[9]), int(entries[10]), int(entries[11])]
-
+        
         print("Input data:", input_data)  # Print input data for debugging
         
         if len(input_data) != 12:
