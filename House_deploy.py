@@ -20,6 +20,8 @@ def load_and_predict(entries):
                       float(entries[4]), int(entries[5]), int(entries[6]), int(entries[7]), 
                       int(entries[8]), int(entries[9]), int(entries[10]), int(entries[11])]
 
+        print("Input data:", input_data)  # Print input data for debugging
+        
         input_data = [input_data]  # Reshape input data
         prediction = model.predict(input_data)
         return f"The predicted price is ${prediction[0]:,.2f}"
