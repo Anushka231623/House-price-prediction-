@@ -3,25 +3,28 @@ import numpy as np
 import streamlit as st
 import joblib
 import requests
-# Load the model
-#loaded_model = pickle.load(open(r"https://github.com/Anushka231623/House-price-prediction-/blob/main/finalized_model.sav",'rb'))
-model_url="https://raw.githubusercontent.com/Anushka231623/House-price-prediction-/blob/main/finalized_model.sav"
-r=requests.get(model_url)
-if r.status_code == 200:
- with open('finalized_model.sav', 'wb') as f:
-  f.write(r.content)
-  loaded_model = pickle.load(open('finalized_model.sav', 'rb'))
-  return loaded_model
-else:
- print("Failed to download the model file")
- return None
-# Load the model
+
+# Function to load the model
+def load_model():
+ model_url = "https://raw.githubusercontent.com/Anushka231623/House-price-prediction-/blob/main/finalized_model.sav"
+ r = requests.get(model_url)
+ if r.status_code == 200:
+  with open('finalized_model.sav', 'wb') as f:
+   f.write(r.content)
+   loaded_model = pickle.load(open('finalized_model.sav', 'rb'))
+   return loaded_model
+ else:
+  print("Failed to download the model file")
+  return None
+  # Load the model
 loaded_model = load_model()
+# Function to perform prediction
 def DecisionTreeRegressor(input_data):
- input_data_asarray = np.asarray(input_data)
- input_data_reshaped = input_data_asarray.reshape(1, -1) 
- prediction = loaded_model.predict(input_data_reshaped)
- return prediction
+    input_data_asarray = np.asarray(input_data)
+    input_data_reshaped = input_data_asarray.reshape(1, -1) 
+    prediction = loaded_model.predict(input_data_reshaped)
+    return prediction
+
  def predict_price(entries):
   try:
    # Get user input
