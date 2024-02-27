@@ -15,19 +15,31 @@ def load_model():
 
 def load_and_predict(entries):
     try:
+        # Load the model
         model = joblib.load('finalized_model.sav')
         print("Model loaded successfully")
 
+        # Print model attributes for debugging
+        print("Model attributes:", model.__dict__)
+
+        # Prepare input data
         input_data = [int(entries[0]), float(entries[1]), int(entries[2]), int(entries[3]), 
                       float(entries[4]), int(entries[5]), int(entries[6]), int(entries[7]), 
                       int(entries[8]), int(entries[9]), int(entries[10]), int(entries[11])]
-        
+
         print("Input data:", input_data)  # Print input data for debugging
         
         if len(input_data) != 12:
             return "Failed to predict price: Invalid input data length"
         
         input_data = [input_data]  # Reshape input data
+
+        # Ensure input data is within the expected range
+        for val in input_data[0]:
+            if val < 0:  # Assuming all features should be non-negative
+                return "Failed to predict price: Input data contains negative values"
+
+        # Make prediction
         prediction = model.predict(input_data)
         print("Prediction:", prediction)  # Print prediction for debugging
         return f"The predicted price is ${prediction[0]:,.2f}"
