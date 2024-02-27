@@ -1,10 +1,19 @@
 import pickle
 import numpy as np
 import streamlit as st
-
+import joblib
+import requests
 # Load the model
-loaded_model = pickle.load(open(r"https://github.com/Anushka231623/House-price-prediction-/blob/main/finalized_model.sav",'rb'))
-
+#loaded_model = pickle.load(open(r"https://github.com/Anushka231623/House-price-prediction-/blob/main/finalized_model.sav",'rb'))
+model_url="https://github.com/Anushka231623/House-price-prediction-/blob/main/finalized_model.sav"
+r=requests.get(model_url)
+ 
+if r.status_code==200:
+    with open('finalized_model.sav','wb') as f:
+        f.write(r.content)
+else:
+    print("Failed to download the model file")
+loaded_model = joblib.load('finalized_model.sav')
 def DecisionTreeRegressor(input_data):
     input_data_asarray = np.asarray(input_data)
     input_data_reshaped = input_data_asarray.reshape(1, -1) 
