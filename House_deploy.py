@@ -24,7 +24,6 @@ def DecisionTreeRegressor(input_data):
     input_data_reshaped = input_data_asarray.reshape(1, -1) 
     prediction = loaded_model.predict(input_data_reshaped)
     return prediction
-
  def predict_price(entries):
   try:
    # Get user input
