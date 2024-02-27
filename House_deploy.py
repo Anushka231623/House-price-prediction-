@@ -3,7 +3,7 @@ import requests
 import joblib
 
 def load_model():
-    model_url = "https://raw.githubusercontent.com/Anushka231623/House-price-prediction-/main/finalized_model.sav"
+    model_url = "https://github.com/Anushka231623/House-price-prediction-/raw/main/finalized_model.sav"
     r = requests.get(model_url)
 
     if r.status_code == 200:
@@ -42,5 +42,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
