@@ -27,6 +27,7 @@ def load_and_predict(entries):
         
         input_data = [input_data]  # Reshape input data
         prediction = model.predict(input_data)
+        print("Prediction:", prediction)  # Print prediction for debugging
         return f"The predicted price is ${prediction[0]:,.2f}"
     except Exception as e:
         print(f"An error occurred during prediction: {e}")
