@@ -25,8 +25,11 @@ def load_and_predict(entries):
         input_data = [input_data]  # Reshape input data
         prediction = model.predict(input_data)
         return f"The predicted price is ${prediction[0]:,.2f}"
+    except ValueError as ve:
+        print(f"ValueError occurred during prediction: {ve}")
+        return f"Failed to predict price due to invalid input: {ve}"
     except Exception as e:
-        print(f"An error occurred: {e}")
+        print(f"An error occurred during prediction: {e}")
         return f"Failed to predict price: {e}"  # Return the specific error message
 
 def main():
